@@ -9,7 +9,12 @@ namespace my_new_app.Controllers
   [Route("api/Heros")]
   public class HeroController : ControllerBase
   {
-    private readonly MockHerosRepo _repository = new MockHerosRepo();
+    private readonly IHerosRepo _repository;
+
+    public HeroController(IHerosRepo repository)
+    {
+      _repository = repository;
+    }
     //GET /api/Heros
     [HttpGet]
     public ActionResult<IEnumerable<Hero>> GetAllHeros()
@@ -22,7 +27,7 @@ namespace my_new_app.Controllers
     public ActionResult<Hero> GetAllHerosById(int id)
     {
       var itemsFilteredByID = this._repository.GetHeroById(id);
-      return itemsFilteredByID;
+      return Ok(itemsFilteredByID);
     }
   }
 }
