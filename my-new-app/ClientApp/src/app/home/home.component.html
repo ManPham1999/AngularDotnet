@@ -4,3 +4,18 @@
   <kendo-grid-column field="powerlevel" title="Powerlevel"> </kendo-grid-column>
   <kendo-grid-column field="gender" title="Gender"> </kendo-grid-column>
 </kendo-grid>
+<div style="margin-top: 2em;">
+  <button
+    kendoButton
+    [primary]="true"
+    value="1"
+    (click)="onGetHeroById($event)"
+  >
+    Get hero by id : 1
+  </button>
+  <h1>{{ AHero !== null ? AHero.powerlevel : "" }}</h1>
+  <h1>{{ AHero !== null ? AHero.powertype : "" }}</h1>
+  <h1>
+    {{ AHero !== null ? (AHero.gender === true ? "Male" : "Female") : "" }}
+  </h1>
+</div>
