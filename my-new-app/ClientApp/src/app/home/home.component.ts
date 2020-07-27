@@ -27,17 +27,16 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.AHero = null;
   }
-  onGetHeroById = (e) => {
-    console.log(parseInt(e.target.value));
-    this.AHero = null;
-    return this.http
-      .get<Hero>(`https://localhost:5001/api/Heros/${parseInt(e.target.value)}`)
-      .subscribe(
-        (result) => {
-          this.AHero = result;
-        },
-        (error) => console.error(error)
-      );
+
+  editHandler = (event) => {
+    console.log(event.dataItem.id);
+    this.http
+      .get<Hero>(`https://localhost:5001/api/Heros/${event.dataItem.id}`)
+      .subscribe((item) => {
+        return (this.AHero = item);
+      });
+    // or
+    // event.dataItem
   };
 }
 interface Hero {

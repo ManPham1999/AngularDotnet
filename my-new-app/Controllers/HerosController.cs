@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +18,7 @@ namespace my_new_app.Controllers
 
     public HeroController(IHerosRepo repository, IMapper mapper)
     {
+      // Console.WriteLine("ahjhj" + repository);
       _mapper = mapper;
       _repository = repository;
     }
@@ -37,6 +39,15 @@ namespace my_new_app.Controllers
         return Ok(_mapper.Map<HeroReadDto>(itemsFilteredByID));
       }
       return NotFound();
+    }
+    //POST api/heros
+    [HttpPost]
+    public ActionResult<HeroReadDto> CreateHero(HeroCreateDto heroCreateDto)
+    {
+      var heroModel = _mapper.Map<Hero>(heroCreateDto);
+      _repository.CreateHero(heroModel);
+      _repository.SaveChanges();
+      return Ok(heroModel);
     }
   }
 }

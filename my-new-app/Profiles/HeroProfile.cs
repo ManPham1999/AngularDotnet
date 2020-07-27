@@ -8,8 +8,9 @@ namespace my_new_app.Profiles
   {
     public HeroProfile()
     {
+      //source -> target
       CreateMap<Hero, HeroReadDto>();
-
+      CreateMap<HeroCreateDto, Hero>();
     }
   }
 }
