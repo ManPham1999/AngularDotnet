@@ -1,3 +1,8 @@
+<div style="margin-bottom: 2em;">
+  <button kendoButton [routerLink]="['/create-hero']">
+    <span class="k-icon k-i-add"></span>&nbsp;Hero
+  </button>
+</div>
 <kendo-grid [data]="gridData" (edit)="editHandler($event)">
   <kendo-grid-column field="id" title="ID"> </kendo-grid-column>
   <kendo-grid-column field="powertype" title="Powertype"> </kendo-grid-column>

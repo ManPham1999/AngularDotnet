@@ -32,9 +32,12 @@ export class HomeComponent implements OnInit {
     console.log(event.dataItem.id);
     this.http
       .get<Hero>(`https://localhost:5001/api/Heros/${event.dataItem.id}`)
-      .subscribe((item) => {
-        return (this.AHero = item);
-      });
+      .subscribe(
+        (item) => {
+          return (this.AHero = item);
+        },
+        (error) => console.error(error)
+      );
     // or
     // event.dataItem
   };

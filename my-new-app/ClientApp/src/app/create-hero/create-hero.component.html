@@ -1,0 +1,63 @@
+<div>
+  <!-- <form method="POST">
+    <tr>
+      <td>Powertype</td>
+      <td>&nbsp;</td>
+      <td><input type="text" /></td>
+    </tr>
+    <br />
+    <tr>
+      <td>Powerlevel</td>
+      <td>&nbsp;</td>
+      <td><input type="text" /></td>
+    </tr>
+    <br />
+    <tr>
+      <td>Gender</td>
+      <td>&nbsp;</td>
+      <td><input type="text" /></td>
+    </tr>
+    <br />
+    <input type="submit" />
+  </form> -->
+  <form>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Powertype</label>
+      <input
+        type="text"
+        class="form-control"
+        id="exampleInputEmail1"
+        aria-describedby="emailHelp"
+        name="ahjhj"
+        [(ngModel)]="powertype"
+      />
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Powerlevel</label>
+      <input
+        type="text"
+        class="form-control"
+        id="exampleInputPassword1"
+        name="ahjhj2"
+        [(ngModel)]="powerlevel"
+      />
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Gender</label>
+      <input
+        type="text"
+        class="form-control"
+        id="exampleInputPassword1"
+        name="ahjhj3"
+        [(ngModel)]="gender"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="onSubmit()">
+      Submit
+    </button>
+  </form>
+  <br />
+</div>
+<button kendoButton [routerLink]="['']" routerLinkActive="router-link-active">
+  <span class="k-icon k-i-undo"></span>&nbsp;Back
+</button>
