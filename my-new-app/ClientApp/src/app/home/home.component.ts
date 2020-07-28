@@ -30,16 +30,19 @@ export class HomeComponent implements OnInit {
 
   editHandler = (event) => {
     console.log(event.dataItem.id);
-    this.http
-      .get<Hero>(`https://localhost:5001/api/Heros/${event.dataItem.id}`)
-      .subscribe(
-        (item) => {
-          return (this.AHero = item);
-        },
-        (error) => console.error(error)
-      );
+    const heroId = event.dataItem.id;
+    this.http.get<Hero>(`https://localhost:5001/api/Heros/${heroId}`).subscribe(
+      (item) => {
+        this.AHero = item;
+        return this.AHero;
+      },
+      (error) => console.error(error)
+    );
     // or
     // event.dataItem
+  };
+  deleteHandler = (e) => {
+    console.log(e.dataItem.id);
   };
 }
 interface Hero {

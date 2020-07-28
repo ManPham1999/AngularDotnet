@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using my_new_app.Models;
 
 namespace my_new_app.Data
@@ -30,12 +31,17 @@ namespace my_new_app.Data
 
     public IEnumerable<Hero> GetHeros()
     {
-      return _context.Heros.ToList();
+      return _context.Heros.FromSqlRaw("SELECT * FROM Heros ORDER BY ID DESC;").ToList();
     }
 
     public bool SaveChanges()
     {
       return (_context.SaveChanges() >= 0);
+    }
+
+    public void UpdateHero(Hero hr)
+    {
+
     }
   }
 }

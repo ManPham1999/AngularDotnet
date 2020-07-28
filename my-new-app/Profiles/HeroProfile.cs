@@ -11,6 +11,8 @@ namespace my_new_app.Profiles
       //source -> target
       CreateMap<Hero, HeroReadDto>();
       CreateMap<HeroCreateDto, Hero>();
+      CreateMap<HeroUpdateDto, Hero>();
+
     }
   }
 }

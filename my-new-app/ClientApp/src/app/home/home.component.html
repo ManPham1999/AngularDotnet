@@ -1,9 +1,13 @@
 <div style="margin-bottom: 2em;">
-  <button kendoButton [routerLink]="['/create-hero']">
+  <button kendoButton [primary]="true" [routerLink]="['/create-hero']">
     <span class="k-icon k-i-add"></span>&nbsp;Hero
   </button>
 </div>
-<kendo-grid [data]="gridData" (edit)="editHandler($event)">
+<kendo-grid
+  [data]="gridData"
+  (edit)="editHandler($event)"
+  (remove)="deleteHandler($event)"
+>
   <kendo-grid-column field="id" title="ID"> </kendo-grid-column>
   <kendo-grid-column field="powertype" title="Powertype"> </kendo-grid-column>
   <kendo-grid-column field="powerlevel" title="Powerlevel"> </kendo-grid-column>
@@ -11,7 +15,10 @@
   <kendo-grid-column field="id" title="Action">
     <ng-template kendoGridCellTemplate let-dataItem>
       <button kendoGridEditCommand [primary]="true">
-        Get hero
+        Get hero</button
+      >&nbsp;
+      <button kendoGridRemoveCommand [primary]="true">
+        <span class="k-icon k-i-delete"></span>&nbsp;Delete
       </button>
     </ng-template>
   </kendo-grid-column>

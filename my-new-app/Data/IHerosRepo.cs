@@ -9,6 +9,8 @@ namespace my_new_app.Data
     IEnumerable<Hero> GetHeros();
     Hero GetHeroById(int id);
     void CreateHero(Hero hr);
+    void UpdateHero(Hero hr);
+
   }
 
 

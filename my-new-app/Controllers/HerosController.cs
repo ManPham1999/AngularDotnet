@@ -47,7 +47,24 @@ namespace my_new_app.Controllers
       var heroModel = _mapper.Map<Hero>(heroCreateDto);
       _repository.CreateHero(heroModel);
       _repository.SaveChanges();
-      return Ok(heroModel);
+      var heroReadDto = _mapper.Map<HeroReadDto>(heroModel);
+      return Ok(heroReadDto);
+    }
+
+    //PUT api/heros/id
+    [HttpPut("{id}")]
+    public ActionResult UpdateHero(int id, HeroUpdateDto heroUpdateDto)
+    {
+      var HeroModelFromRepo = _repository.GetHeroById(id);
+      if (HeroModelFromRepo == null)
+      {
+        return NotFound();
+      }
+      _mapper.Map(heroUpdateDto, HeroModelFromRepo);
+      _repository.UpdateHero(HeroModelFromRepo);
+      _repository.SaveChanges();
+
+      return NoContent();
     }
   }
 }
