@@ -12,6 +12,7 @@ namespace my_new_app.Profiles
       CreateMap<Hero, HeroReadDto>();
       CreateMap<HeroCreateDto, Hero>();
       CreateMap<HeroUpdateDto, Hero>();
+      CreateMap<HeroDeleteDto, Hero>();
 
     }
   }

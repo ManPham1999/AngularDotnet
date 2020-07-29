@@ -30,7 +30,7 @@ namespace my_new_app.Controllers
       return Ok(_mapper.Map<IEnumerable<HeroReadDto>>(items));
     }
     //GET /api/Heros/5
-    [HttpGet("{id}")]
+    [HttpGet("{id}", Name = "GetAllHerosById")]
     public ActionResult<HeroReadDto> GetAllHerosById(int id)
     {
       var itemsFilteredByID = this._repository.GetHeroById(id);
@@ -45,10 +45,13 @@ namespace my_new_app.Controllers
     public ActionResult<HeroReadDto> CreateHero(HeroCreateDto heroCreateDto)
     {
       var heroModel = _mapper.Map<Hero>(heroCreateDto);
+      // Console.WriteLine("heroModel" + heroModel);
+      // Console.WriteLine("heroCreateDto" + heroCreateDto);
       _repository.CreateHero(heroModel);
       _repository.SaveChanges();
       var heroReadDto = _mapper.Map<HeroReadDto>(heroModel);
-      return Ok(heroReadDto);
+      return CreatedAtRoute(nameof(GetAllHerosById), new { ID = heroReadDto.ID }, heroReadDto);
+      // return Ok(heroReadDto);
     }
 
     //PUT api/heros/id
@@ -64,6 +67,19 @@ namespace my_new_app.Controllers
       _repository.UpdateHero(HeroModelFromRepo);
       _repository.SaveChanges();
 
+      return NoContent();
+    }
+
+    //DELETE api/heros/id
+    [HttpDelete("{id}")]
+    public ActionResult DeleteHero(int id)
+    {
+      if (id <= 0)
+      {
+        return NotFound();
+      }
+      _repository.DeleteHero(id);
+      _repository.SaveChanges();
       return NoContent();
     }
   }

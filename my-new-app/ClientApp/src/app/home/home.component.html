@@ -4,9 +4,12 @@
   </button>
 </div>
 <kendo-grid
-  [data]="gridData"
+  [kendoGridBinding]="gridData"
   (edit)="editHandler($event)"
   (remove)="deleteHandler($event)"
+  [sortable]="true"
+  [pageSize]="3"
+  [pageable]="true"
 >
   <kendo-grid-column field="id" title="ID"> </kendo-grid-column>
   <kendo-grid-column field="powertype" title="Powertype"> </kendo-grid-column>
@@ -23,10 +26,31 @@
     </ng-template>
   </kendo-grid-column>
 </kendo-grid>
-<div style="margin-top: 2em;">
-  <h1>{{ AHero !== null ? AHero.powerlevel : "" }}</h1>
-  <h1>{{ AHero !== null ? AHero.powertype : "" }}</h1>
-  <h1>
-    {{ AHero !== null ? (AHero.gender === true ? "Male" : "Female") : "" }}
-  </h1>
+<div
+  style="margin-top: 2em; text-align: center; background-color: blueviolet;"
+  *ngIf="AHero !== null && toggleUpdateForm === true"
+>
+  <h1>Update Hero Form</h1>
+  <h4 disabled>ID</h4>
+  <input type="text" [(ngModel)]="AHero.id" disabled />
+  <h4>Powertype</h4>
+  <input type="text" [(ngModel)]="AHero.powertype" />
+  <h4>Powerlevel</h4>
+  <input type="text" [(ngModel)]="AHero.powerlevel" />
+  <h4>Gender (1 : male | 0 : femal)</h4>
+  <input type="text" [(ngModel)]="AHero.gender" />
+  <br />
+  <br />
+
+  <div>
+    <button kendoButton [primary]="true" (click)="onEditHero()">Update</button>
+    &nbsp;
+    <button
+      kendoButton
+      [primary]="true"
+      (click)="this.toggleUpdateForm = false"
+    >
+      Close
+    </button>
+  </div>
 </div>

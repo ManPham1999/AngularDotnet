@@ -10,6 +10,7 @@ namespace my_new_app.Data
     Hero GetHeroById(int id);
     void CreateHero(Hero hr);
     void UpdateHero(Hero hr);
+    void DeleteHero(int id);
 
   }
 

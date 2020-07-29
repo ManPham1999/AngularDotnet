@@ -23,6 +23,7 @@ export class CreateHeroComponent implements OnInit {
       })
       .subscribe(
         (item) => {
+          console.log(item);
           if (item) {
             this.router.navigate([""]);
             alert("success !");

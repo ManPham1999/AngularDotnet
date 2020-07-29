@@ -24,6 +24,18 @@ namespace my_new_app.Data
       _context.Heros.Add(hr);
     }
 
+    public void DeleteHero(int id)
+    {
+      if (_context.Heros.FirstOrDefault(h => h.ID == id) != null)
+      {
+        _context.Heros.Remove(_context.Heros.FirstOrDefault(h => h.ID == id));
+      }
+      else
+      {
+        throw new ArgumentNullException();
+      }
+    }
+
     public Hero GetHeroById(int id)
     {
       return _context.Heros.FirstOrDefault(h => h.ID == id);
