@@ -13,6 +13,8 @@ import { GridModule } from "@progress/kendo-angular-grid";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ButtonsModule } from "@progress/kendo-angular-buttons";
 import { CreateHeroComponent } from "./create-hero/create-hero.component";
+import { DialogsModule } from '@progress/kendo-angular-dialog';
+
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { CreateHeroComponent } from "./create-hero/create-hero.component";
     GridModule,
     BrowserAnimationsModule,
     ButtonsModule,
+    DialogsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -7,8 +7,9 @@
   [kendoGridBinding]="gridData"
   (edit)="editHandler($event)"
   (remove)="deleteHandler($event)"
+  [height]="400"
+  [pageSize]="10"
   [sortable]="true"
-  [pageSize]="3"
   [pageable]="true"
 >
   <kendo-grid-column field="id" title="ID"> </kendo-grid-column>
