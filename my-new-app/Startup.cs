@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using my_new_app.Data;
+using my_new_app.Profiles;
 
 namespace my_new_app
 {
@@ -24,7 +25,7 @@ namespace my_new_app
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-      services.AddAutoMapper(typeof(Startup));
+      services.AddAutoMapper(typeof(HeroProfile).Assembly);
       services.AddDbContext<HeroContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("HeroConnection")));
       services.AddControllersWithViews();
       // In production, the Angular files will be served from this directory

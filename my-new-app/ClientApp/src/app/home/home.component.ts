@@ -14,25 +14,44 @@ import {
 })
 export class HomeComponent implements OnInit {
   public gridData: Hero[];
-  toggleUpdateForm: boolean;
+  toggleUpdateForm: boolean = false;
   public AHero: Hero;
+  public opened = true;
+  heroId: number;
+
+  public close(status) {
+    if (this.heroId !== null) {
+      if (status === "yes") {
+        this.deleteHandler(this.heroId);
+        this.opened = false;
+      } else {
+        this.opened = false;
+      }
+    }
+  }
+
+  public open(e) {
+    this.heroId = e.dataItem.id;
+    this.toggleUpdateForm = false;
+    this.opened = true;
+  }
   constructor(private http: HttpClient) {
     http.get<Hero[]>("https://localhost:5001/api/Heros/").subscribe(
       (result) => {
         this.gridData = result;
-        console.log(this.gridData);
       },
       (error) => console.error(error)
     );
   }
   ngOnInit() {
     this.AHero = null;
+    this.opened = false;
     this.toggleUpdateForm = false;
+    this.heroId = null;
   }
 
   editHandler = (event) => {
-    console.log(event.dataItem.id);
-    this.toggleUpdateForm = true;
+    this.toggleUpdateForm = !this.toggleUpdateForm;
     const heroId = event.dataItem.id;
     this.http.get<Hero>(`https://localhost:5001/api/Heros/${heroId}`).subscribe(
       (item) => {
@@ -42,11 +61,10 @@ export class HomeComponent implements OnInit {
       (error) => console.error(error)
     );
   };
-  deleteHandler = (e) => {
-    console.log(e.dataItem.id);
-    if (e.dataItem.id) {
+  deleteHandler = (id: number) => {
+    if (id !== null) {
       this.http
-        .delete(`https://localhost:5001/api/Heros/${e.dataItem.id}`)
+        .delete(`https://localhost:5001/api/Heros/${id}`)
         .subscribe((item) => {
           this.http
             .get<Hero[]>("https://localhost:5001/api/Heros")
@@ -54,8 +72,6 @@ export class HomeComponent implements OnInit {
               this.gridData = item;
             });
         });
-    } else {
-      alert("no id found!");
     }
   };
   onEditHero = () => {

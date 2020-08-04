@@ -1,34 +1,59 @@
 <div style="margin-bottom: 2em;">
-  <button kendoButton [primary]="true" [routerLink]="['/create-hero']">
+  <button
+    look="flat"
+    kendoButton
+    [primary]="true"
+    [routerLink]="['/create-hero']"
+  >
     <span class="k-icon k-i-add"></span>&nbsp;Hero
   </button>
 </div>
 <kendo-grid
   [kendoGridBinding]="gridData"
   (edit)="editHandler($event)"
-  (remove)="deleteHandler($event)"
+  (remove)="open($event)"
   [height]="400"
   [pageSize]="10"
   [sortable]="true"
   [pageable]="true"
 >
-  <kendo-grid-column field="id" title="ID"> </kendo-grid-column>
-  <kendo-grid-column field="powertype" title="Powertype"> </kendo-grid-column>
-  <kendo-grid-column field="powerlevel" title="Powerlevel"> </kendo-grid-column>
-  <kendo-grid-column field="gender" title="Gender"> </kendo-grid-column>
-  <kendo-grid-column field="id" title="Action">
+  <kendo-grid-column field="id" title="ID" tabindex="1"> </kendo-grid-column>
+  <kendo-grid-column field="powertype" title="Powertype" tabindex="2">
+  </kendo-grid-column>
+  <kendo-grid-column field="powerlevel" title="Powerlevel" tabindex="3">
+  </kendo-grid-column>
+  <kendo-grid-column field="gender" title="Gender" tabindex="4">
+  </kendo-grid-column>
+  <kendo-grid-column title="Action" tabindex="5">
     <ng-template kendoGridCellTemplate let-dataItem>
-      <button kendoGridEditCommand [primary]="true">
-        Get hero</button
+      <button look="flat" kendoGridEditCommand [primary]="true">
+        <span class="k-icon k-i-edit"></span>&nbsp;Get hero</button
       >&nbsp;
-      <button kendoGridRemoveCommand [primary]="true">
+      <button look="flat" kendoButton kendoGridRemoveCommand [primary]="true">
         <span class="k-icon k-i-delete"></span>&nbsp;Delete
       </button>
+      <kendo-dialog
+        title="Confirm Delete"
+        *ngIf="opened"
+        (close)="close('cancel')"
+        [minWidth]="250"
+        [width]="450"
+      >
+        <p style="margin: 30px; text-align: center;">
+          Are you sure you want to delete this hero?
+        </p>
+        <kendo-dialog-actions>
+          <button kendoButton (click)="close('no')" look="flat">No</button>
+          <button kendoButton (click)="close('yes')" primary="true" look="flat">
+            Yes
+          </button>
+        </kendo-dialog-actions>
+      </kendo-dialog>
     </ng-template>
   </kendo-grid-column>
 </kendo-grid>
 <div
-  style="margin-top: 2em; text-align: center; background-color: blueviolet;"
+  style="margin: 2em; text-align: center; background-color: blueviolet;"
   *ngIf="AHero !== null && toggleUpdateForm === true"
 >
   <h1>Update Hero Form</h1>
@@ -42,16 +67,19 @@
   <input type="text" [(ngModel)]="AHero.gender" />
   <br />
   <br />
-
   <div>
-    <button kendoButton [primary]="true" (click)="onEditHero()">Update</button>
+    <button kendoButton [primary]="true" (click)="onEditHero()" look="flat">
+      Update
+    </button>
     &nbsp;
     <button
       kendoButton
       [primary]="true"
       (click)="this.toggleUpdateForm = false"
+      look="flat"
     >
       Close
     </button>
   </div>
+  <br />
 </div>

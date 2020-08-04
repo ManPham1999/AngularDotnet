@@ -27,6 +27,8 @@ namespace my_new_app.Controllers
     public ActionResult<IEnumerable<HeroReadDto>> GetAllHeros()
     {
       var items = this._repository.GetHeros();
+      // Console.WriteLine("item " + items);
+      // Console.WriteLine("item after trans " + _mapper.Map<IEnumerable<HeroReadDto>>(items));
       return Ok(_mapper.Map<IEnumerable<HeroReadDto>>(items));
     }
     //GET /api/Heros/5
@@ -63,8 +65,8 @@ namespace my_new_app.Controllers
       {
         return NotFound();
       }
-      _mapper.Map(heroUpdateDto, HeroModelFromRepo);
-      _repository.UpdateHero(HeroModelFromRepo);
+      var HeroAfterUpdated = _mapper.Map(heroUpdateDto, HeroModelFromRepo);
+      _repository.UpdateHero(HeroAfterUpdated);
       _repository.SaveChanges();
 
       return NoContent();
